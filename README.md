@@ -1,2 +1,2 @@
 # brace-mod-request-laminas
-Laminas Request Bindings
+Bindings for laminas framework (former ZendFramework) HttpServerRequest / HttpServerResponse
