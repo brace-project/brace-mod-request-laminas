@@ -15,7 +15,7 @@ class LaminasResponseFactoryBridge extends ResponseFactory implements BraceRespo
 
     public function createResponseWithBody(string $body, int $code = 200, array $headers=[]): ResponseInterface
     {
-        return new TextResponse($body, $code, $headers = []);
+        return new TextResponse($body, $code, $headers);
     }
 
     public function createResponseWithoutBody(int $code = 200, array $headers=[]): ResponseInterface
