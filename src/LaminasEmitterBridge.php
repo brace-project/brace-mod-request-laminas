@@ -17,14 +17,14 @@ class LaminasEmitterBridge implements EmitterInferface
     public function emit(ResponseInterface $response) : void
     {
         $stack = new EmitterStack();
-        
+
         $stack->push(new SapiEmitter());
-        $stack->push(new StreamedResponseEmitter());
         $stack->push(new SapiStreamEmitter());
+        $stack->push(new StreamedResponseEmitter());
         @ini_set('zlib.output_compression',0); // Turn off compression (won't work with this)
         @ini_set('implicit_flush',1);
         @ob_end_clean();
-        
+
         try {
             $stack->emit($response);
         } catch (EmitterException $e) {
