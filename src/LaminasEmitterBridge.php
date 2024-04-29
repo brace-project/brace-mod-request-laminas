@@ -17,7 +17,9 @@ class LaminasEmitterBridge implements EmitterInferface
     public function emit(ResponseInterface $response) : void
     {
         $stack = new EmitterStack();
+        
         $stack->push(new SapiEmitter());
+        $stack->push(new StreamedResponseEmitter());
         $stack->push(new SapiStreamEmitter());
         try {
             $stack->emit($response);

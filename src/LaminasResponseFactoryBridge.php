@@ -22,4 +22,9 @@ class LaminasResponseFactoryBridge extends ResponseFactory implements BraceRespo
     {
         return new EmptyResponse($code, $headers);
     }
+    
+    public function createStreamedResponse(callable $callback, int $code = 200, array $headers=[]): ResponseInterface
+    {
+        throw new \InvalidArgumentException("Not implemented");
+    }
 }
