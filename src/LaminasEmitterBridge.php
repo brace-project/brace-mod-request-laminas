@@ -21,9 +21,12 @@ class LaminasEmitterBridge implements EmitterInferface
         $stack->push(new SapiEmitter());
         $stack->push(new SapiStreamEmitter());
         $stack->push(new StreamedResponseEmitter());
-        @ini_set('zlib.output_compression',0); // Turn off compression (won't work with this)
-        @ini_set('implicit_flush',1);
-        @ob_end_clean();
+        if ( ! headers_sent()) {
+            @ini_set('zlib.output_compression',0); // Turn off compression (won't work with this)
+            @ini_set('implicit_flush',1);
+            @ob_end_clean();
+        }
+        
 
         try {
             $stack->emit($response);
