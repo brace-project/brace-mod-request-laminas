@@ -26,13 +26,14 @@ class LaminasEmitterBridge implements EmitterInferface
             @ini_set('implicit_flush',1);
             @ob_end_clean();
         }
-        
+
+
 
         try {
             $stack->emit($response);
         } catch (EmitterException $e) {
             if (headers_sent($file, $line)) {
-                throw new \Error($e->getMessage() . " (Output stated in: '$file' on Line: $line)", 0, $e);
+                throw new \Error($e->getMessage() . " (Output stated in: '$file' on Line: $line)\nOriginal content: " . get_class($response), 0, $e);
             }
             throw new EmitterException($e->getMessage() . " (turn output buffering off to see the file and line - use ob_end_flush() to disable)", $e->getCode(), $e);
         }

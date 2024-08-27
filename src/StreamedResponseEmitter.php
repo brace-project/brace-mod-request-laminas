@@ -15,14 +15,14 @@ class StreamedResponseEmitter implements EmitterInterface
         if (! ($response instanceof StreamedResponse)) {
             return false;
         }
+
+        if ( ! headers_sent()) {
+            $this->emitStatusLine($response);
+            $this->emitHeaders($response);
+        }
         
-        $this->assertNoPreviousOutput();
-        $this->emitHeaders($response);
-        $this->emitStatusLine($response);
-        
-        flush();
         $response->__emit();
-        
+
         return true;
     }
 }
