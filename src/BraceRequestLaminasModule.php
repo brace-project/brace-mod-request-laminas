@@ -6,7 +6,10 @@ namespace Brace\Mod\Request\Zend;
 
 use Brace\Core\BraceApp;
 use Brace\Core\BraceModule;
+use Brace\Core\Helper\QueryParams;
+use Laminas\Diactoros\Request;
 use Laminas\Diactoros\ResponseFactory;
+use Laminas\Diactoros\ServerRequest;
 use Laminas\Diactoros\ServerRequestFactory;
 use Phore\Di\Container\Producer\DiService;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -20,6 +23,12 @@ class BraceRequestLaminasModule implements BraceModule
         $braceApp->define("request", new DiService(
             function ()  {
                 return ServerRequestFactory::fromGlobals();
+            }
+        ));
+
+        $braceApp->define("queryParams", new DiService(
+            function (ServerRequest $request) {
+                return new QueryParams($request->getQueryParams());
             }
         ));
 
