@@ -19,9 +19,4 @@ public function streamAction() {
 
 ## NDJSON streaming
 
-Return `$app->responseFactory->createNdjsonResponse($callback)` and call
-`$stream->send($data)` inside the callback.
-
-- [PHP controller](examples/ndjson-handler.php)
-- [JavaScript client](examples/ndjson-client.js)
-- [Server configuration](examples/NDjson%20Config.md)
+See the [NDJSON examples and server configuration in brace/core](https://github.com/brace-project/brace-core/tree/main/examples).
